@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--gene-bg-1: #1a1a1a;
+	--gene-bg-2: #1e2022;
+	--gene-bg-3: #232830;
+}
