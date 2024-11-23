@@ -11,7 +11,7 @@ import NavBar from './components/NavBar.vue';
 
 <style>
 #app {
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Microsoft JhengHei', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 html {
   transition: .5s ease;

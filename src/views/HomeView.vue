@@ -1,28 +1,13 @@
 <template>
   <div class="container mx-auto max-w-3xl">
-    <main class="pt-6 px-3 flex">
-      <img class="rounded-full animate__animated animate__tada animate__delay-1s w-[150px] h-[150px] sm:w-[250px] sm:h-[250px]"
-        src="@/assets/selfie.jpg"
-        alt="selfie"
-        id="selfie"
-      >
-      <div class="flex flex-col flex-1 p-3 sm:p-8">
-        <h1 class="text-yellow-500 sm:text-3xl">Hello, I'm Gene</h1>
-        <h5 class="text-xs sm:text-lg">coding | jogging | cat</h5>
-        <div class="flex gap-2 mt-auto">
-          <a href="https://github.com/gene323" class="sm:text-xl">
-            <i class="bi bi-github"></i>
-          </a>
-          <a href="https://instagram.com/hochienn" class="sm:text-xl">
-            <i class="bi bi-instagram"></i>
-          </a>
-          <a href="mailto:geneho323@gmail.com" class="sm:text-xl">
-            <i class="bi bi-envelope-fill"></i>
-          </a>
-        </div>
-      </div>
+    <main class="">
+      <h1 class="text-yellow-500 text-4xl text-center py-6 animate__animated animate__tada">A Ju</h1>
+      <swiper-container init="false" class="w-80 md:w-full" ref="swiper">
+        <swiper-slide v-for="image in images" :key="image">
+          <img class="aju-image" :src="`./aju/${image}.jpg`" alt="">
+        </swiper-slide>
+      </swiper-container>
     </main>
-
     <div id="area">
       <div id="cat"></div>
     </div>
@@ -30,6 +15,33 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref, reactive } from 'vue';
+import { register } from 'swiper/element/bundle';
+
+const images = ref(9)
+const swiper = ref()
+
+onMounted(() => {
+  register();
+
+  // tablet or wider device
+  if (document.body.offsetWidth >= 1024) {
+    Object.assign(swiper.value, {
+      slidesPerView: 3,
+      effect: 'coverflow',
+    })
+  } else {
+    Object.assign(swiper.value, {
+      effect: 'cards',
+      cardsEffect: {},
+    })
+  }
+
+  swiper.value.initialize();
+})
+
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -38,17 +50,8 @@
   .bi {
     color: black;
   }
-  #selfie {
-    box-shadow: 2px 0px 8px 5px gray;
-  }
+  
 }
-
-[data-theme=dark] {
-  #selfie {
-    box-shadow: 2px 0px 8px 5px black;
-  }
-}
-
 
 #area {
   position: fixed;
