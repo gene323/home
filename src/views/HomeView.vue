@@ -1,9 +1,9 @@
 <template>
-  <div class="container mx-auto max-w-3xl">
-    <main class="">
+  <div class="container mx-auto max-w-3xl relative">
+    <main ref="imageSection">
       <h1 class="text-yellow-500 text-4xl text-center py-6 animate__animated animate__tada">A Ju</h1>
-      <swiper-container init="false" class="w-80 md:w-full" ref="swiper">
-        <swiper-slide v-for="image in images" :key="image">
+      <swiper-container init="false" class=" w-[230px] md:w-full" ref="swiper">
+        <swiper-slide v-for="image in images" :key="image" class="">
           <img class="aju-image" :src="`./aju/${image}.jpg`" alt="">
         </swiper-slide>
       </swiper-container>
@@ -20,6 +20,7 @@ import { register } from 'swiper/element/bundle';
 
 const images = ref(9)
 const swiper = ref()
+const imageSection = ref()
 
 onMounted(() => {
   register();
@@ -31,9 +32,10 @@ onMounted(() => {
       effect: 'coverflow',
     })
   } else {
+    imageSection.value.style.overflow = 'hidden'
     Object.assign(swiper.value, {
       effect: 'cards',
-      cardsEffect: {},
+      autoHeight: true,
     })
   }
 
@@ -54,10 +56,10 @@ onMounted(() => {
 }
 
 #area {
-  position: fixed;
+  position: absolute;
   width: 100%;
   left: 0px;
-  bottom: 0px;
+  bottom: -150px;
 }
 
 #cat {
