@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto max-w-3xl relative">
-    <main ref="imageSection">
+  <div class="container mx-auto relative">
+    <main class="max-w-3xl mx-auto" ref="imageSection">
       <h1 class="text-yellow-500 text-4xl text-center py-6 animate__animated animate__tada">A Ju</h1>
       <swiper-container init="false" class=" w-[230px] md:w-full" ref="swiper">
         <swiper-slide v-for="image in images" :key="image" class="">
@@ -60,22 +60,23 @@ onMounted(() => {
   width: 100%;
   left: 0px;
   bottom: -150px;
+  overflow: hidden;
 }
 
 #cat {
   width: 142px;
   height: 98px;
   background: url("@/assets/cat_sprite.png") repeat-x;
-  animation: walk .8s steps(3) infinite, forward 20s linear infinite;
+  animation: walk 1s steps(2) infinite, forward 90s linear infinite;
   position: relative;
 }
 
 @keyframes walk {
-  0% { background-position: 0px; }
+  0% { background-position: -142px; }
   100% { background-position: -428px; }
 }
 @keyframes forward {
-  0% { left: -30%; }
-  100% { left: 120%; }
+  0% { left: -142px; }
+  100% { left: 100%; }
 }
 </style>
