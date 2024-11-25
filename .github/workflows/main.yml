@@ -17,7 +17,6 @@ jobs:
   build:
     # 這個job要run在ubuntu上
     runs-on: ubuntu-latest
-    permissions: write
 
     # job的步驟要做些什麼咧
     steps:
