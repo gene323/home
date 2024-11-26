@@ -14,7 +14,7 @@ import NavBar from './components/NavBar.vue';
   font-family: 'Microsoft JhengHei', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 html {
-  transition: .5s ease;
+  transition: all .5s ease;
   min-height: 100%;
 }
 [data-theme=dark] {

@@ -9,7 +9,7 @@
       </swiper-container>
     </main>
     <div id="area">
-      <div id="cat"></div>
+      <div v-if="catState.show" id="cat" ref="cat" @click="catState.speed -= 100"></div>
     </div>
   </div>
 </template>
@@ -21,9 +21,53 @@ import { register } from 'swiper/element/bundle';
 const images = ref(9)
 const swiper = ref()
 const imageSection = ref()
+const cat = ref()
+const catState = ref({
+  frames: 3,
+  currentFrame: 0,
+  pos: -142,
+  speed: 200,
+  sprite: [142, 0, 284], // left leg, close, right left
+  posOffset: [1, 10, 1], // why this stat, I don't know, I tested it
+  direction: 1,
+  show: true,
+})
+
+const playWithCat = () => {
+  // change image
+  cat.value.style.backgroundPosition = `-${catState.value.sprite[catState.value.currentFrame]}px`
+
+  // change direction
+  if (catState.value.currentFrame === 2) {
+    catState.value.direction = -1
+  } else if (catState.value.currentFrame === 0){
+    catState.value.direction = 1
+  }
+
+  // move
+  if (catState.value.pos > document.body.offsetWidth) {
+    catState.value.pos = -142
+  } else {
+    catState.value.pos += catState.value.posOffset[catState.value.currentFrame]
+  }
+  cat.value.style.left = `${catState.value.pos}px`
+
+  catState.value.currentFrame += catState.value.direction
+
+  // cat hide
+  if (catState.value.speed <= 0 &&
+    cat.value.style.left === '-142px'
+  ) {
+    catState.value.show = false
+    return ;
+  }
+
+  // call itself, loop
+  setTimeout(playWithCat, catState.value.speed)
+}
 
 onMounted(() => {
-  register();
+  register()
 
   // tablet or wider device
   if (document.body.offsetWidth >= 1024) {
@@ -39,7 +83,8 @@ onMounted(() => {
     })
   }
 
-  swiper.value.initialize();
+  swiper.value.initialize()
+  playWithCat()
 })
 
 
@@ -47,12 +92,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-
 [data-theme=light] {
   .bi {
     color: black;
   }
-  
 }
 
 #area {
@@ -66,8 +109,9 @@ onMounted(() => {
 #cat {
   width: 142px;
   height: 98px;
+  left: 5%;
   background: url("@/assets/cat_sprite.png") repeat-x;
-  animation: walk 1s steps(2) infinite, forward 90s linear infinite;
+  // animation: walk 1s steps(2) infinite, forward 90s linear infinite;
   position: relative;
 }
 
