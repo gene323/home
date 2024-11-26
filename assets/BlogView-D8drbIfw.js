@@ -1,1 +1,0 @@
-import{_ as e,o,c as r,a as s}from"./index-D-cb_sEV.js";const a={},c={class:"container mx-auto max-w-3xl"};function n(l,t){return o(),r("div",c,t[0]||(t[0]=[s("h1",{class:"text-orange-300 text-5xl text-pretty pt-24"}," Sorry, the author is too lazy to write blogs >< ",-1)]))}const i=e(a,[["render",n]]);export{i as default};
